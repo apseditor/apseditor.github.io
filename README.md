@@ -365,6 +365,7 @@
     position: relative;
   }
 
+  /* ── UPDATED PROFILE IMAGE SECTION ── */
   .about-img-wrap {
     position: relative;
     border-radius: 16px;
@@ -372,6 +373,7 @@
     aspect-ratio: 16/9;
     border: 1px solid var(--border);
     box-shadow: 0 0 60px rgba(59,130,246,0.1), 0 0 0 1px rgba(59,130,246,0.05);
+    background: #0e1118;
   }
 
   .about-img-wrap::before {
@@ -383,12 +385,12 @@
     pointer-events: none;
   }
 
-  .about-img-wrap img {
+  /* Use an iframe to embed the Drive file — most reliable cross-origin method */
+  .about-img-wrap iframe {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    border: none;
     display: block;
-    filter: grayscale(20%) contrast(1.05);
   }
 
   /* Intro video below pfp */
@@ -887,10 +889,16 @@
     </div>
     <div class="about-grid">
       <div class="about-visual reveal">
-        <!-- Profile photo 16:9 -->
+
+        <!-- ── PROFILE IMAGE: embedded via Google Drive iframe preview ── -->
         <div class="about-img-wrap">
-          <img src="https://drive.google.com/uc?export=view&id=1hTg2OXfRVEecAwfc-qntyRnXT5HIZ3m7" alt="Arghya Samanta" onerror="this.style.background='#0e1118';this.alt='Photo'">
+          <iframe
+            src="https://drive.google.com/file/d/1hTg2OXfRVEecAwfc-qntyRnXT5HIZ3m7/preview"
+            allow="autoplay"
+            title="Arghya Samanta">
+          </iframe>
         </div>
+
         <!-- Intro video below photo -->
         <div class="intro-video-wrap">
           <iframe 
@@ -946,7 +954,6 @@
 
     <!-- ALL -->
     <div id="tab-all" class="tab-content video-grid active">
-      <!-- Medical -->
       <div class="video-card" onclick="openModal('https://drive.google.com/file/d/12ptrR7XBpbgoMoTmfMQH67693zIvHGcB/preview','Medical Edit 01')">
         <div class="video-thumb">
           <iframe src="https://drive.google.com/file/d/12ptrR7XBpbgoMoTmfMQH67693zIvHGcB/preview" title="Medical 01"></iframe>
@@ -975,7 +982,6 @@
         </div>
         <div class="video-info"><span class="video-cat">Medical</span><div class="video-title">Medical Edit 04</div></div>
       </div>
-      <!-- Real Estate -->
       <div class="video-card" onclick="openModal('https://drive.google.com/file/d/1J3a7sXH9Mp3inen2q6BmfouVw1gALdHd/preview','Real Estate Edit 01')">
         <div class="video-thumb">
           <iframe src="https://drive.google.com/file/d/1J3a7sXH9Mp3inen2q6BmfouVw1gALdHd/preview" title="Real Estate 01"></iframe>
@@ -997,7 +1003,6 @@
         </div>
         <div class="video-info"><span class="video-cat">Real Estate</span><div class="video-title">Real Estate Edit 03</div></div>
       </div>
-      <!-- Podcast -->
       <div class="video-card" onclick="openModal('https://drive.google.com/file/d/1XfwntyIalFjDB-9f6VRitjPIn6zOPkfZ/preview','Podcast Reel Edit')">
         <div class="video-thumb">
           <iframe src="https://drive.google.com/file/d/1XfwntyIalFjDB-9f6VRitjPIn6zOPkfZ/preview" title="Podcast"></iframe>
@@ -1005,7 +1010,6 @@
         </div>
         <div class="video-info"><span class="video-cat">Podcast</span><div class="video-title">Podcast Reel Edit</div></div>
       </div>
-      <!-- Others -->
       <div class="video-card" onclick="openModal('https://drive.google.com/file/d/1W6h-oND23LMk7i1mx2LyCRSUYnv4j5ke/preview','Edit 01')">
         <div class="video-thumb">
           <iframe src="https://drive.google.com/file/d/1W6h-oND23LMk7i1mx2LyCRSUYnv4j5ke/preview" title="Other 01"></iframe>
