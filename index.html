@@ -833,6 +833,378 @@
     text-decoration: none;
     color: inherit;
   }
+
+  /* ── FEEDBACK SECTION ── */
+  #feedback {
+    background: linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.03) 50%, transparent 100%);
+  }
+
+  .feedback-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  /* Rating summary card */
+  .rating-summary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(59,130,246,0.05);
+  }
+  .rating-summary::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent);
+  }
+
+  .big-score {
+    font-family: var(--font-head);
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--white);
+    text-shadow: 0 0 40px rgba(59,130,246,0.3);
+    margin-bottom: 8px;
+  }
+
+  .summary-stars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .summary-stars .s-star {
+    font-size: 22px;
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251,191,36,0.5);
+  }
+
+  .summary-stars .s-star.empty { color: rgba(255,255,255,0.15); text-shadow: none; }
+
+  .total-reviews {
+    font-family: var(--font-head);
+    font-size: 12px;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 28px;
+  }
+
+  /* Bar chart breakdown */
+  .rating-bars { display: flex; flex-direction: column; gap: 8px; }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .bar-label {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    width: 14px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .bar-star-icon { font-size: 11px; flex-shrink: 0; }
+
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    border-radius: 99px;
+    transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 0 8px rgba(251,191,36,0.4);
+  }
+
+  .bar-count {
+    font-family: var(--font-head);
+    font-size: 11px;
+    color: var(--text-secondary);
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  /* Review form */
+  .review-form-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .review-form-card::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent);
+  }
+
+  .form-title {
+    font-family: var(--font-head);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .form-sub {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+
+  /* Interactive star picker */
+  .star-picker {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .star-picker .pick-star {
+    font-size: 32px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.15);
+    transition: color 0.15s, transform 0.15s, text-shadow 0.15s;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .star-picker .pick-star.lit,
+  .star-picker .pick-star.hover {
+    color: #fbbf24;
+    text-shadow: 0 0 14px rgba(251,191,36,0.6);
+  }
+
+  .star-picker .pick-star:hover { transform: scale(1.2); }
+
+  .star-label {
+    font-family: var(--font-head);
+    font-size: 12px;
+    color: var(--blue-bright);
+    margin-bottom: 16px;
+    min-height: 18px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .feedback-name-input,
+  .feedback-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-family: var(--font-head);
+    font-size: 14px;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    resize: none;
+    margin-bottom: 14px;
+  }
+  .feedback-name-input::placeholder,
+  .feedback-textarea::placeholder { color: var(--text-secondary); }
+  .feedback-name-input:focus,
+  .feedback-textarea:focus {
+    border-color: rgba(59,130,246,0.45);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    background: rgba(59,130,246,0.04);
+  }
+
+  .feedback-textarea { height: 100px; }
+
+  .submit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .char-count {
+    font-family: var(--font-head);
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  .btn-submit {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--blue);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 28px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 24px rgba(59,130,246,0.35);
+  }
+  .btn-submit:hover {
+    background: var(--blue-bright);
+    box-shadow: 0 0 40px rgba(59,130,246,0.55);
+    transform: translateY(-2px);
+  }
+  .btn-submit:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .submit-success {
+    display: none;
+    font-family: var(--font-head);
+    font-size: 13px;
+    color: #4ade80;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+  }
+  .submit-success.show { display: flex; }
+
+  /* Reviews list */
+  .reviews-list-wrap {
+    margin-top: 56px;
+  }
+
+  .reviews-list-title {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .reviews-list-title .rev-count-badge {
+    font-size: 11px;
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.25);
+    color: var(--blue-bright);
+    border-radius: 50px;
+    padding: 3px 10px;
+    font-weight: 600;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .review-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+  }
+  .review-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(251,191,36,0.25), transparent);
+  }
+  .review-card:hover {
+    border-color: rgba(59,130,246,0.25);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transform: translateY(-3px);
+  }
+
+  .review-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .reviewer-name {
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .review-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .review-stars span {
+    font-size: 13px;
+    color: #fbbf24;
+    text-shadow: 0 0 6px rgba(251,191,36,0.4);
+  }
+  .review-stars span.empty { color: rgba(255,255,255,0.15); text-shadow: none; }
+
+  .review-body {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  .review-date {
+    font-family: var(--font-head);
+    font-size: 10px;
+    color: rgba(138,155,184,0.55);
+    letter-spacing: 0.05em;
+  }
+
+  .reviews-empty {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 40px 0;
+    opacity: 0.6;
+  }
+
+  .reviews-loading {
+    font-family: var(--font-head);
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 32px 0;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .feedback-layout { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -846,6 +1218,7 @@
   <a href="#about">About</a>
   <a href="#work">Work</a>
   <a href="#contact">Contact</a>
+  <a href="#feedback">Feedback</a>
 </nav>
 
 <!-- HERO -->
@@ -1156,6 +1529,81 @@
   </div>
 </section>
 
+<!-- FEEDBACK -->
+<section id="feedback">
+  <div class="section-wrap">
+    <div class="section-divider reveal">
+      <span class="section-label">Feedback</span>
+    </div>
+    <div class="reveal">
+      <h2 class="section-title">Client <span>Reviews</span></h2>
+      <p class="section-sub">Share your experience working with me — your feedback matters.</p>
+    </div>
+
+    <div class="feedback-layout reveal">
+
+      <!-- LEFT: Rating Summary -->
+      <div class="rating-summary">
+        <div class="big-score" id="avgScore">—</div>
+        <div class="summary-stars" id="summaryStars">
+          <span class="s-star empty">★</span>
+          <span class="s-star empty">★</span>
+          <span class="s-star empty">★</span>
+          <span class="s-star empty">★</span>
+          <span class="s-star empty">★</span>
+        </div>
+        <div class="total-reviews" id="totalReviews">No reviews yet</div>
+        <div class="rating-bars" id="ratingBars">
+          <div class="bar-row"><span class="bar-label">5</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar5" style="width:0%"></div></div><span class="bar-count" id="cnt5">0</span></div>
+          <div class="bar-row"><span class="bar-label">4</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar4" style="width:0%"></div></div><span class="bar-count" id="cnt4">0</span></div>
+          <div class="bar-row"><span class="bar-label">3</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar3" style="width:0%"></div></div><span class="bar-count" id="cnt3">0</span></div>
+          <div class="bar-row"><span class="bar-label">2</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar2" style="width:0%"></div></div><span class="bar-count" id="cnt2">0</span></div>
+          <div class="bar-row"><span class="bar-label">1</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar1" style="width:0%"></div></div><span class="bar-count" id="cnt1">0</span></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Submit Form -->
+      <div class="review-form-card">
+        <div class="form-title">Leave a Review</div>
+        <div class="form-sub">No sign-in needed — just your honest thoughts.</div>
+
+        <div class="star-picker" id="starPicker">
+          <span class="pick-star" data-val="1">★</span>
+          <span class="pick-star" data-val="2">★</span>
+          <span class="pick-star" data-val="3">★</span>
+          <span class="pick-star" data-val="4">★</span>
+          <span class="pick-star" data-val="5">★</span>
+        </div>
+        <div class="star-label" id="starHintLabel">Click a star to rate</div>
+
+        <input class="feedback-name-input" id="reviewerName" type="text" placeholder="Your name (or leave blank for Anonymous)" maxlength="40">
+        <textarea class="feedback-textarea" id="reviewBody" placeholder="Share your experience working with Arghya…" maxlength="400"></textarea>
+
+        <div class="submit-row">
+          <span class="char-count" id="charCount">0 / 400</span>
+          <div class="submit-success" id="submitSuccess">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Review submitted!
+          </div>
+          <button class="btn-submit" id="submitBtn" onclick="submitReview()" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+            Submit Review
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews List -->
+    <div class="reviews-list-wrap reveal">
+      <div class="reviews-list-title">
+        All Reviews
+        <span class="rev-count-badge" id="revCountBadge">0</span>
+      </div>
+      <div id="reviewsContainer"><div class="reviews-loading">Loading reviews…</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <p>© 2026 <span>Arghya Samanta</span> · Video Editor · India</p>
@@ -1263,6 +1711,161 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal({ target: document.getElementById('videoModal') });
   });
+
+  // ── FEEDBACK SYSTEM ──
+  const STORAGE_KEY = 'arghya-reviews-v1';
+  let selectedRating = 0;
+  let allReviews = [];
+
+  const starLabels = ['', 'Poor', 'Fair', 'Good', 'Great', 'Excellent!'];
+
+  // Star picker interactions
+  const picks = document.querySelectorAll('.pick-star');
+  picks.forEach(star => {
+    star.addEventListener('mouseenter', () => {
+      const v = +star.dataset.val;
+      picks.forEach(s => s.classList.toggle('hover', +s.dataset.val <= v));
+      document.getElementById('starHintLabel').textContent = starLabels[v];
+    });
+    star.addEventListener('mouseleave', () => {
+      picks.forEach(s => s.classList.remove('hover'));
+      document.getElementById('starHintLabel').textContent = selectedRating ? starLabels[selectedRating] : 'Click a star to rate';
+    });
+    star.addEventListener('click', () => {
+      selectedRating = +star.dataset.val;
+      picks.forEach(s => {
+        s.classList.toggle('lit', +s.dataset.val <= selectedRating);
+        s.classList.remove('hover');
+      });
+      document.getElementById('starHintLabel').textContent = starLabels[selectedRating];
+      document.getElementById('submitBtn').disabled = false;
+    });
+  });
+
+  // Char counter
+  document.getElementById('reviewBody').addEventListener('input', function() {
+    document.getElementById('charCount').textContent = this.value.length + ' / 400';
+  });
+
+  // Load reviews from storage
+  async function loadReviews() {
+    try {
+      const result = await window.storage.get(STORAGE_KEY, true);
+      allReviews = result ? JSON.parse(result.value) : [];
+    } catch(e) {
+      allReviews = [];
+    }
+    renderAll();
+  }
+
+  // Save reviews to storage
+  async function saveReviews() {
+    try {
+      await window.storage.set(STORAGE_KEY, JSON.stringify(allReviews), true);
+    } catch(e) { console.error('Save failed', e); }
+  }
+
+  // Submit a review
+  async function submitReview() {
+    if (!selectedRating) return;
+    const name = document.getElementById('reviewerName').value.trim() || 'Anonymous';
+    const body = document.getElementById('reviewBody').value.trim();
+    const btn = document.getElementById('submitBtn');
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    const review = {
+      id: Date.now(),
+      name,
+      rating: selectedRating,
+      body,
+      date: new Date().toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' })
+    };
+
+    allReviews.unshift(review);
+    await saveReviews();
+
+    // Reset form
+    document.getElementById('reviewerName').value = '';
+    document.getElementById('reviewBody').value = '';
+    document.getElementById('charCount').textContent = '0 / 400';
+    selectedRating = 0;
+    picks.forEach(s => s.classList.remove('lit','hover'));
+    document.getElementById('starHintLabel').textContent = 'Click a star to rate';
+    btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg> Submit Review';
+    btn.disabled = true;
+
+    const success = document.getElementById('submitSuccess');
+    success.classList.add('show');
+    setTimeout(() => success.classList.remove('show'), 3000);
+
+    renderAll();
+  }
+
+  function starsHTML(rating, size = 13) {
+    let html = '<div class="review-stars">';
+    for (let i = 1; i <= 5; i++) {
+      html += `<span class="${i <= rating ? '' : 'empty'}" style="font-size:${size}px">★</span>`;
+    }
+    return html + '</div>';
+  }
+
+  function renderAll() {
+    // Summary stats
+    const total = allReviews.length;
+    const counts = {1:0, 2:0, 3:0, 4:0, 5:0};
+    let sum = 0;
+    allReviews.forEach(r => { counts[r.rating]++; sum += r.rating; });
+    const avg = total ? (sum / total) : 0;
+
+    document.getElementById('avgScore').textContent = total ? avg.toFixed(1) : '—';
+    document.getElementById('totalReviews').textContent = total ? `Based on ${total} review${total > 1 ? 's' : ''}` : 'No reviews yet';
+    document.getElementById('revCountBadge').textContent = total;
+
+    // Summary stars
+    const summaryContainer = document.getElementById('summaryStars');
+    summaryContainer.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const s = document.createElement('span');
+      s.className = 's-star' + (i <= Math.round(avg) ? '' : ' empty');
+      s.textContent = '★';
+      summaryContainer.appendChild(s);
+    }
+
+    // Bars
+    for (let i = 1; i <= 5; i++) {
+      const pct = total ? (counts[i] / total * 100) : 0;
+      document.getElementById('bar' + i).style.width = pct + '%';
+      document.getElementById('cnt' + i).textContent = counts[i];
+    }
+
+    // Reviews list
+    const container = document.getElementById('reviewsContainer');
+    if (!total) {
+      container.innerHTML = '<div class="reviews-empty">No reviews yet — be the first to leave one! ✨</div>';
+      return;
+    }
+    container.innerHTML = '<div class="reviews-grid">' +
+      allReviews.map(r => `
+        <div class="review-card">
+          <div class="review-header">
+            <span class="reviewer-name">${escapeHTML(r.name)}</span>
+            ${starsHTML(r.rating)}
+          </div>
+          ${r.body ? `<div class="review-body">${escapeHTML(r.body)}</div>` : ''}
+          <div class="review-date">${r.date}</div>
+        </div>
+      `).join('') +
+    '</div>';
+  }
+
+  function escapeHTML(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // Init
+  loadReviews();
 </script>
 </body>
 </html>
