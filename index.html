@@ -1229,7 +1229,7 @@
     <span class="line2">Samanta</span>
   </h1>
   <p class="hero-desc">
-    High-end video editor with 4 years of hands-on agency experience — specializing in dynamic, high-retention content from cinematic real estate to viral medical reels.
+    High-end video editor with 2 years of hands-on agency experience — specializing in dynamic, high-retention content from cinematic real estate to viral medical reels.
   </p>
   <div class="hero-stats">
     <div class="stat">
@@ -1284,7 +1284,7 @@
       <div class="about-text reveal">
         <h2>Crafting Stories<br><span>Frame by Frame</span></h2>
         <p>
-          I'm a video editor with 4 years of hands-on agency experience, specializing in dynamic, high-retention content creation. My work spans cinematic real estate, medical education, viral social content, and long-form podcasts.
+          I'm a video editor with 2 years of hands-on agency experience, specializing in dynamic, high-retention content creation. My work spans cinematic real estate, medical education, viral social content, and long-form podcasts.
         </p>
         <p>
           I blend technical precision with creative pacing — bringing together motion graphics, color science, and storytelling instincts to produce content that doesn't just look good, but performs.
