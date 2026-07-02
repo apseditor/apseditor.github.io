@@ -7,9 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
 <style>
   :root {
     --bg: #080a0f;
@@ -124,61 +122,23 @@
   .section-sub { font-family: var(--font-body); font-size: 17px; color: var(--text-secondary); margin-bottom: 56px; max-width: 500px; }
   .tab-content { display: none; }
   .tab-content.active { display: grid; }
-  #feedback { background: linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.03) 50%, transparent 100%); }
-  .feedback-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: start; }
-  .rating-summary { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(59,130,246,0.05); }
-  .rating-summary::before { content: ''; position: absolute; top: -1px; left: 15%; right: 15%; height: 1px; background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent); }
-  .big-score { font-family: var(--font-head); font-size: 72px; font-weight: 700; line-height: 1; color: var(--white); text-shadow: 0 0 40px rgba(59,130,246,0.3); margin-bottom: 8px; }
-  .summary-stars { display: flex; justify-content: center; gap: 4px; margin-bottom: 8px; }
-  .summary-stars .s-star { font-size: 22px; color: #fbbf24; text-shadow: 0 0 10px rgba(251,191,36,0.5); }
-  .summary-stars .s-star.empty { color: rgba(255,255,255,0.15); text-shadow: none; }
-  .total-reviews { font-family: var(--font-head); font-size: 12px; color: var(--text-secondary); letter-spacing: 0.05em; margin-bottom: 28px; }
-  .rating-bars { display: flex; flex-direction: column; gap: 8px; }
-  .bar-row { display: flex; align-items: center; gap: 10px; }
-  .bar-label { font-family: var(--font-head); font-size: 12px; font-weight: 600; color: var(--text-secondary); width: 14px; text-align: right; flex-shrink: 0; }
-  .bar-star-icon { font-size: 11px; flex-shrink: 0; }
-  .bar-track { flex: 1; height: 6px; background: rgba(255,255,255,0.07); border-radius: 99px; overflow: hidden; }
-  .bar-fill { height: 100%; background: linear-gradient(90deg, #fbbf24, #f59e0b); border-radius: 99px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 0 8px rgba(251,191,36,0.4); }
-  .bar-count { font-family: var(--font-head); font-size: 11px; color: var(--text-secondary); width: 20px; flex-shrink: 0; }
-  .review-form-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; position: relative; overflow: hidden; }
-  .review-form-card::before { content: ''; position: absolute; top: -1px; left: 15%; right: 15%; height: 1px; background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent); }
-  .form-title { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-  .form-sub { font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
-  .star-picker { display: flex; gap: 6px; margin-bottom: 20px; }
-  .star-picker .pick-star { font-size: 32px; cursor: pointer; color: rgba(255,255,255,0.15); transition: color 0.15s, transform 0.15s, text-shadow 0.15s; user-select: none; line-height: 1; }
-  .star-picker .pick-star.lit, .star-picker .pick-star.hover { color: #fbbf24; text-shadow: 0 0 14px rgba(251,191,36,0.6); }
-  .star-picker .pick-star:hover { transform: scale(1.2); }
-  .star-label { font-family: var(--font-head); font-size: 12px; color: var(--blue-bright); margin-bottom: 16px; min-height: 18px; font-weight: 600; letter-spacing: 0.05em; }
-  .feedback-name-input, .feedback-textarea { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary); font-family: var(--font-head); font-size: 14px; padding: 12px 16px; outline: none; transition: border-color 0.25s, box-shadow 0.25s; resize: none; margin-bottom: 14px; }
-  .feedback-name-input::placeholder, .feedback-textarea::placeholder { color: var(--text-secondary); }
-  .feedback-name-input:focus, .feedback-textarea:focus { border-color: rgba(59,130,246,0.45); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); background: rgba(59,130,246,0.04); }
-  .feedback-textarea { height: 100px; }
-  .submit-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-  .char-count { font-family: var(--font-head); font-size: 11px; color: var(--text-secondary); }
-  .btn-submit { font-family: var(--font-head); font-size: 13px; font-weight: 600; color: var(--white); background: var(--blue); border: none; border-radius: 50px; padding: 12px 28px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 0 24px rgba(59,130,246,0.35); }
-  .btn-submit:hover { background: var(--blue-bright); box-shadow: 0 0 40px rgba(59,130,246,0.55); transform: translateY(-2px); }
-  .btn-submit:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
-  .submit-success { display: none; font-family: var(--font-head); font-size: 13px; color: #4ade80; align-items: center; gap: 6px; font-weight: 600; }
-  .submit-success.show { display: flex; }
-  .reviews-list-wrap { margin-top: 56px; }
-  .reviews-list-title { font-family: var(--font-head); font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-  .reviews-list-title .rev-count-badge { font-size: 11px; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.25); color: var(--blue-bright); border-radius: 50px; padding: 3px 10px; font-weight: 600; }
-  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-  .review-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; transition: all 0.3s; position: relative; overflow: hidden; animation: fadeUp 0.5s ease both; }
-  .review-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(251,191,36,0.25), transparent); }
-  .review-card:hover { border-color: rgba(59,130,246,0.25); box-shadow: 0 8px 32px rgba(0,0,0,0.2); transform: translateY(-3px); }
-  .review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-  .reviewer-name { font-family: var(--font-head); font-size: 14px; font-weight: 600; color: var(--text-primary); }
-  .review-stars { display: flex; gap: 2px; }
-  .review-stars span { font-size: 13px; color: #fbbf24; text-shadow: 0 0 6px rgba(251,191,36,0.4); }
-  .review-stars span.empty { color: rgba(255,255,255,0.15); text-shadow: none; }
-  .review-body { font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 10px; }
-  .review-date { font-family: var(--font-head); font-size: 10px; color: rgba(138,155,184,0.55); letter-spacing: 0.05em; }
-  .reviews-empty { font-family: var(--font-body); font-size: 15px; color: var(--text-secondary); text-align: center; padding: 40px 0; opacity: 0.6; }
-  .reviews-loading { font-family: var(--font-head); font-size: 13px; color: var(--text-secondary); text-align: center; padding: 32px 0; letter-spacing: 0.05em; }
-  .live-badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-head); font-size: 10px; font-weight: 600; color: #4ade80; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 50px; padding: 3px 10px; }
   .live-badge::before { content: ''; width: 5px; height: 5px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 6px #4ade80; animation: pulse 2s infinite; }
-  @media (max-width: 768px) { .feedback-layout { grid-template-columns: 1fr; } .reviews-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) { }
+  .yt-live-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+    margin-left: 4px;
+    vertical-align: middle;
+    box-shadow: 0 0 6px #4ade80;
+    animation: pulse 2s infinite;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .yt-live-dot.active { opacity: 1; }
+  .stat-num.up { color: #4ade80 !important; text-shadow: 0 0 20px rgba(74,222,128,0.6) !important; transition: color 0.6s, text-shadow 0.6s; }
+  .stat-num.down { color: #f87171 !important; text-shadow: 0 0 20px rgba(248,113,113,0.6) !important; transition: color 0.6s, text-shadow 0.6s; }
 </style>
 </head>
 <body>
@@ -191,7 +151,7 @@
   <a href="#about">About</a>
   <a href="#work">Work</a>
   <a href="#contact">Contact</a>
-  <a href="#feedback">Feedback</a>
+
 </nav>
 
 <section id="home">
@@ -203,8 +163,14 @@
   <p class="hero-desc">High-end video editor with 2 years of hands-on agency experience — specializing in dynamic, high-retention content from cinematic real estate to viral medical reels.</p>
   <div class="hero-stats">
     <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Clients</span></div>
-    <div class="stat"><span class="stat-num">81.5K</span><span class="stat-label">Subscribers</span></div>
-    <div class="stat"><span class="stat-num">58.5M+</span><span class="stat-label">Views</span></div>
+    <div class="stat">
+      <span class="stat-num" id="yt-subs">—</span>
+      <span class="stat-label">Subscribers <span class="yt-live-dot" id="subs-dot"></span></span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" id="yt-views">—</span>
+      <span class="stat-label">Total Views <span class="yt-live-dot" id="views-dot"></span></span>
+    </div>
   </div>
   <div class="hero-btns">
     <a href="#work" class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>View Work</a>
@@ -316,63 +282,7 @@
   </div>
 </section>
 
-<section id="feedback">
-  <div class="section-wrap">
-    <div class="section-divider reveal"><span class="section-label">Feedback</span></div>
-    <div class="reveal">
-      <h2 class="section-title">Client <span>Reviews</span></h2>
-      <p class="section-sub">Share your experience working with me — reviews are saved permanently and visible to everyone. <span class="live-badge">Live</span></p>
-    </div>
-    <div class="feedback-layout reveal">
-      <div class="rating-summary">
-        <div class="big-score" id="avgScore">—</div>
-        <div class="summary-stars" id="summaryStars">
-          <span class="s-star empty">★</span><span class="s-star empty">★</span><span class="s-star empty">★</span><span class="s-star empty">★</span><span class="s-star empty">★</span>
-        </div>
-        <div class="total-reviews" id="totalReviews">No reviews yet</div>
-        <div class="rating-bars">
-          <div class="bar-row"><span class="bar-label">5</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar5" style="width:0%"></div></div><span class="bar-count" id="cnt5">0</span></div>
-          <div class="bar-row"><span class="bar-label">4</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar4" style="width:0%"></div></div><span class="bar-count" id="cnt4">0</span></div>
-          <div class="bar-row"><span class="bar-label">3</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar3" style="width:0%"></div></div><span class="bar-count" id="cnt3">0</span></div>
-          <div class="bar-row"><span class="bar-label">2</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar2" style="width:0%"></div></div><span class="bar-count" id="cnt2">0</span></div>
-          <div class="bar-row"><span class="bar-label">1</span><span class="bar-star-icon">⭐</span><div class="bar-track"><div class="bar-fill" id="bar1" style="width:0%"></div></div><span class="bar-count" id="cnt1">0</span></div>
-        </div>
-      </div>
-      <div class="review-form-card">
-        <div class="form-title">Leave a Review</div>
-        <div class="form-sub">No sign-in needed — reviews are saved permanently for everyone to see.</div>
-        <div class="star-picker" id="starPicker">
-          <span class="pick-star" data-val="1">★</span>
-          <span class="pick-star" data-val="2">★</span>
-          <span class="pick-star" data-val="3">★</span>
-          <span class="pick-star" data-val="4">★</span>
-          <span class="pick-star" data-val="5">★</span>
-        </div>
-        <div class="star-label" id="starHintLabel">Click a star to rate</div>
-        <input class="feedback-name-input" id="reviewerName" type="text" placeholder="Your name (or leave blank for Anonymous)" maxlength="40">
-        <textarea class="feedback-textarea" id="reviewBody" placeholder="Share your experience working with Arghya…" maxlength="400"></textarea>
-        <div class="submit-row">
-          <span class="char-count" id="charCount">0 / 400</span>
-          <div class="submit-success" id="submitSuccess">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Review saved!
-          </div>
-          <button class="btn-submit" id="submitBtn" onclick="submitReview()" disabled>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
-            Submit Review
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="reviews-list-wrap reveal">
-      <div class="reviews-list-title">
-        All Reviews <span class="rev-count-badge" id="revCountBadge">0</span>
-        <span class="live-badge" style="margin-left:4px;">Live</span>
-      </div>
-      <div id="reviewsContainer"><div class="reviews-loading">Loading reviews…</div></div>
-    </div>
-  </div>
-</section>
+
 
 <footer>
   <p>© 2026 <span>Arghya Samanta</span> · Video Editor · India</p>
@@ -449,150 +359,89 @@
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal({ target: document.getElementById('videoModal') }); });
 
-  // ── FIREBASE REAL-TIME FEEDBACK ──
-  const firebaseConfig = {
-    apiKey: "AIzaSyCnKGcikBVi1T6uSkdSsnz1CP09fSkfEGo",
-    authDomain: "arghya-portfolio-ca411.firebaseapp.com",
-    projectId: "arghya-portfolio-ca411",
-    storageBucket: "arghya-portfolio-ca411.firebasestorage.app",
-    messagingSenderId: "21756462820",
-    appId: "1:21756462820:web:0f4260e2d5aabc768c8ef1",
-    measurementId: "G-GVPYBDT5V0"
-  };
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const reviewsCol = db.collection('reviews');
+  // ── YOUTUBE REAL-TIME LIVE STATS ──
+  const YT_API_KEY = 'AIzaSyBSoadMBSN9YGl6sPjVq_0bY-c4bTu5FLg';
+  const YT_HANDLE  = 'APS_EDITOR_1M';
+  const REFRESH_MS = 30000; // refresh every 30 seconds
 
-  let selectedRating = 0;
-  let allReviews = [];
-  const starLabels = ['', 'Poor', 'Fair', 'Good', 'Great', 'Excellent!'];
+  let prevSubs  = null;
+  let prevViews = null;
 
-  // Star picker
-  const picks = document.querySelectorAll('.pick-star');
-  picks.forEach(star => {
-    star.addEventListener('mouseenter', () => {
-      const v = +star.dataset.val;
-      picks.forEach(s => s.classList.toggle('hover', +s.dataset.val <= v));
-      document.getElementById('starHintLabel').textContent = starLabels[v];
-    });
-    star.addEventListener('mouseleave', () => {
-      picks.forEach(s => s.classList.remove('hover'));
-      document.getElementById('starHintLabel').textContent = selectedRating ? starLabels[selectedRating] : 'Click a star to rate';
-    });
-    star.addEventListener('click', () => {
-      selectedRating = +star.dataset.val;
-      picks.forEach(s => { s.classList.toggle('lit', +s.dataset.val <= selectedRating); s.classList.remove('hover'); });
-      document.getElementById('starHintLabel').textContent = starLabels[selectedRating];
-      document.getElementById('submitBtn').disabled = false;
-    });
-  });
+  function formatCount(n) {
+    if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(2) + 'B';
+    if (n >= 1_000_000)     return (n / 1_000_000).toFixed(2) + 'M';
+    if (n >= 1_000)         return (n / 1_000).toFixed(1) + 'K';
+    return n.toLocaleString();
+  }
 
-  // Char counter
-  document.getElementById('reviewBody').addEventListener('input', function() {
-    document.getElementById('charCount').textContent = this.value.length + ' / 400';
-  });
+  function animateNumber(el, newVal, prevVal) {
+    if (prevVal === null) { el.textContent = formatCount(newVal); return; }
+    if (newVal === prevVal) return;
 
-  // ── REAL-TIME LISTENER — updates instantly for ALL visitors ──
-  reviewsCol.orderBy('timestamp', 'desc').onSnapshot(snapshot => {
-    allReviews = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    renderAll();
-  }, err => {
-    console.error('Firestore error:', err);
-    document.getElementById('reviewsContainer').innerHTML = '<div class="reviews-empty">Could not load reviews. Please refresh the page.</div>';
-  });
+    const isUp = newVal > prevVal;
+    el.classList.remove('up', 'down');
+    void el.offsetWidth; // force reflow
+    el.classList.add(isUp ? 'up' : 'down');
 
-  // ── SUBMIT TO FIRESTORE ──
-  async function submitReview() {
-    if (!selectedRating) return;
-    const name = document.getElementById('reviewerName').value.trim() || 'Anonymous';
-    const body = document.getElementById('reviewBody').value.trim();
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Saving…';
+    // Smooth count animation
+    const duration = 1200;
+    const start = performance.now();
+    const from  = prevVal;
+    const to    = newVal;
 
+    function step(now) {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease     = 1 - Math.pow(1 - progress, 3); // ease out cubic
+      const current  = Math.round(from + (to - from) * ease);
+      el.textContent = formatCount(current);
+      if (progress < 1) requestAnimationFrame(step);
+      else {
+        el.textContent = formatCount(to);
+        setTimeout(() => el.classList.remove('up', 'down'), 2000);
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  async function fetchYouTubeStats() {
     try {
-      await reviewsCol.add({
-        name,
-        rating: selectedRating,
-        body,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
-      });
+      const res = await fetch(
+        `https://www.googleapis.com/youtube/v3/channels?part=statistics&forHandle=${YT_HANDLE}&key=${YT_API_KEY}`
+      );
+      const data = await res.json();
 
-      // Reset form
-      document.getElementById('reviewerName').value = '';
-      document.getElementById('reviewBody').value = '';
-      document.getElementById('charCount').textContent = '0 / 400';
-      selectedRating = 0;
-      picks.forEach(s => s.classList.remove('lit', 'hover'));
-      document.getElementById('starHintLabel').textContent = 'Click a star to rate';
-      btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg> Submit Review';
-      btn.disabled = true;
+      if (data.items && data.items.length > 0) {
+        const stats   = data.items[0].statistics;
+        const newSubs  = +stats.subscriberCount;
+        const newViews = +stats.viewCount;
 
-      const success = document.getElementById('submitSuccess');
-      success.classList.add('show');
-      setTimeout(() => success.classList.remove('show'), 3000);
-    } catch (err) {
-      console.error('Submit failed:', err);
-      btn.textContent = 'Failed — try again';
-      btn.disabled = false;
+        const subsEl  = document.getElementById('yt-subs');
+        const viewsEl = document.getElementById('yt-views');
+
+        animateNumber(subsEl,  newSubs,  prevSubs);
+        animateNumber(viewsEl, newViews, prevViews);
+
+        prevSubs  = newSubs;
+        prevViews = newViews;
+
+        // Activate live dots
+        document.getElementById('subs-dot').classList.add('active');
+        document.getElementById('views-dot').classList.add('active');
+      }
+    } catch (e) {
+      // fallback silently
+      if (prevSubs === null) {
+        document.getElementById('yt-subs').textContent  = '84.3K';
+        document.getElementById('yt-views').textContent = '61.2M';
+      }
     }
   }
 
-  function starsHTML(rating, size = 13) {
-    let html = '<div class="review-stars">';
-    for (let i = 1; i <= 5; i++) html += `<span class="${i <= rating ? '' : 'empty'}" style="font-size:${size}px">★</span>`;
-    return html + '</div>';
-  }
-
-  function renderAll() {
-    const total = allReviews.length;
-    const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-    let sum = 0;
-    allReviews.forEach(r => { counts[r.rating]++; sum += r.rating; });
-    const avg = total ? (sum / total) : 0;
-
-    document.getElementById('avgScore').textContent = total ? avg.toFixed(1) : '—';
-    document.getElementById('totalReviews').textContent = total ? `Based on ${total} review${total > 1 ? 's' : ''}` : 'No reviews yet';
-    document.getElementById('revCountBadge').textContent = total;
-
-    const summaryContainer = document.getElementById('summaryStars');
-    summaryContainer.innerHTML = '';
-    for (let i = 1; i <= 5; i++) {
-      const s = document.createElement('span');
-      s.className = 's-star' + (i <= Math.round(avg) ? '' : ' empty');
-      s.textContent = '★';
-      summaryContainer.appendChild(s);
-    }
-
-    for (let i = 1; i <= 5; i++) {
-      const pct = total ? (counts[i] / total * 100) : 0;
-      document.getElementById('bar' + i).style.width = pct + '%';
-      document.getElementById('cnt' + i).textContent = counts[i];
-    }
-
-    const container = document.getElementById('reviewsContainer');
-    if (!total) {
-      container.innerHTML = '<div class="reviews-empty">No reviews yet — be the first to leave one! ✨</div>';
-      return;
-    }
-    container.innerHTML = '<div class="reviews-grid">' +
-      allReviews.map(r => `
-        <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">${escapeHTML(r.name)}</span>
-            ${starsHTML(r.rating)}
-          </div>
-          ${r.body ? `<div class="review-body">${escapeHTML(r.body)}</div>` : ''}
-          <div class="review-date">${r.date || ''}</div>
-        </div>
-      `).join('') + '</div>';
-  }
-
-  function escapeHTML(str) {
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
+  // First fetch immediately, then every 30s
+  fetchYouTubeStats();
+  setInterval(fetchYouTubeStats, REFRESH_MS);
 </script>
 </body>
 </html>
