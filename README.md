@@ -42,8 +42,8 @@ h1 span+span{font-style:italic;color:transparent;background:linear-gradient(135d
 .about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 .vid{aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#0e1118}
 .vid+.vid{margin-top:16px}
-.pfp{aspect-ratio:4/5;max-width:360px;margin:0 auto}
-.pfp img{width:100%;height:100%;object-fit:cover;display:block}
+.pfp{aspect-ratio:16/9}
+.pfp img{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block}
 .vid iframe{width:100%;height:100%;border:0}
 h2{font:400 clamp(42px,6.5vw,76px)/1 var(--disp);letter-spacing:-.015em;margin-bottom:22px}
 h2 em{font-style:italic;color:transparent;background:linear-gradient(135deg,#60a5fa,#3b82f6);-webkit-background-clip:text;background-clip:text}
