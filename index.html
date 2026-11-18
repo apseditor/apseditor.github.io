@@ -42,6 +42,8 @@ h1 span+span{font-style:italic;color:transparent;background:linear-gradient(135d
 .about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 .vid{aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#0e1118}
 .vid+.vid{margin-top:16px}
+.pfp{aspect-ratio:4/5;max-width:360px;margin:0 auto}
+.pfp img{width:100%;height:100%;object-fit:cover;display:block}
 .vid iframe{width:100%;height:100%;border:0}
 h2{font:400 clamp(42px,6.5vw,76px)/1 var(--disp);letter-spacing:-.015em;margin-bottom:22px}
 h2 em{font-style:italic;color:transparent;background:linear-gradient(135deg,#60a5fa,#3b82f6);-webkit-background-clip:text;background-clip:text}
@@ -63,19 +65,21 @@ h2 em{font-style:italic;color:transparent;background:linear-gradient(135deg,#60a
 body::before,body::after{transform:translateZ(0)}
 #wlabel,#wtitle{position:absolute;pointer-events:none;font-family:var(--disp);font-weight:400;letter-spacing:-.02em}
 #wlabel{inset:0;display:grid;place-items:center;text-align:center;color:var(--tx)}
-#wtitle{top:50%;left:6%;transform:translateY(-50%);opacity:0;max-width:22%}
+#wtitle{top:50%;left:6%;transform:translateY(-50%);opacity:0;max-width:28%}
 #widx{position:absolute;top:6%;right:3%;list-style:none;text-align:right;font-family:var(--head);line-height:1.8;color:var(--mu)}
 #widx button{all:unset;cursor:pointer;transition:color .2s}
 #widx button.on{color:#fff;font-weight:600}
+#wtitle small{display:block;font:500 .3em/1.4 var(--head);letter-spacing:.04em;color:var(--mu);margin-top:.7em}
 .hint{text-align:center;font:500 12px var(--head);color:var(--mu);letter-spacing:.1em;text-transform:uppercase;padding-bottom:20px}
 @media(max-width:700px){.about{grid-template-columns:1fr}.stats{flex-direction:column}.stat+.stat{border-left:0;border-top:1px solid rgba(255,255,255,.08)}#wtitle{left:50%;top:auto;bottom:5%;transform:translateX(-50%);text-align:center;max-width:90%}#widx{display:none}nav a{padding:8px 11px}}
 /* ending */
 #end{position:relative;z-index:1;background:radial-gradient(ellipse 90% 40% at 50% 100%,rgba(200,215,255,.9) 0,rgba(70,110,255,.55) 35%,transparent 72%),radial-gradient(45% 30% at 15% 20%,rgba(37,70,220,.5),transparent 70%),#02030a}
 #end::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.25;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.6 -.3'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
-#reveal{height:230vh;position:relative}
-#reveal .in{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+#reveal{min-height:80vh;position:relative;display:flex}
+#reveal .in{width:100%;min-height:80vh;display:flex;align-items:center;justify-content:center;padding:96px 24px}
 #rt{font:400 clamp(40px,8vw,104px)/1.02 var(--disp);letter-spacing:-.02em;text-align:center;max-width:980px}
-#rt span{opacity:.12;will-change:opacity}
+#rt span{display:inline-block;opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i)*70ms)}
+#rt.seen span{opacity:1;transform:none}
 .contact{position:relative;max-width:760px;margin:0 auto;padding:0 20px 110px}
 .cc{border-radius:28px;padding:52px 32px;text-align:center}
 .cc h2{margin-bottom:12px}
@@ -102,14 +106,14 @@ footer{position:relative;z-index:1;text-align:center;padding:22px;font:12px var(
   <div class="badge glass">Premium Video Editor</div>
   <h1><span>Arghya</span><span>Samanta</span></h1>
   <p class="desc">High-end video editor with 2 years of hands-on agency experience — specializing in dynamic, high-retention content from cinematic real estate to viral medical reels.</p>
-  <div class="stats glass"><div class="stat"><b>30+</b><i>Clients</i></div><div class="stat"><b>84.3K</b><i>Subscribers</i></div><div class="stat"><b>61.2M</b><i>Total Views</i></div></div>
+  <div class="stats glass"><div class="stat"><b>30+</b><i>Clients</i></div><div class="stat"><b>86K</b><i>Subscribers</i></div><div class="stat"><b>61.2M</b><i>Total Views</i></div></div>
   <div class="row"><a href="#work" class="btn blue">▶ View Work</a><a href="#end" class="btn">Get in Touch</a></div>
 </section>
 
 <section id="about"><div class="wrap">
   <span class="lab glass">About</span>
   <div class="about">
-    <div><div class="vid glass"><iframe src="https://drive.google.com/file/d/1hTg2OXfRVEecAwfc-qntyRnXT5HIZ3m7/preview" allow="autoplay" loading="lazy" title="Arghya Samanta"></iframe></div><div class="vid glass"><iframe src="https://drive.google.com/file/d/12lZlO3zvHG5wTu0uUrsm9qH6eCMKPZpV/preview" allow="autoplay" loading="lazy" title="Intro Video"></iframe></div></div>
+    <div><div class="vid pfp glass"><img src="https://drive.google.com/thumbnail?id=1QHkfXFQr_ySrppn1eaYApJKw4CnraT4J&sz=w1000" alt="Arghya Samanta" loading="lazy" decoding="async"></div><div class="vid glass"><iframe src="https://drive.google.com/file/d/12lZlO3zvHG5wTu0uUrsm9qH6eCMKPZpV/preview" allow="autoplay" loading="lazy" title="Intro Video"></iframe></div></div>
     <div>
       <h2>Crafting Stories<br><em>Frame by Frame</em></h2>
       <p>I’m a video editor with 2 years of hands-on agency experience, specializing in dynamic, high-retention content creation. My work spans cinematic real estate, medical education, viral social content, and long-form podcasts.</p>
@@ -152,10 +156,11 @@ footer{position:relative;z-index:1;text-align:center;padding:22px;font:12px var(
 <div id="modal"><div class="mb glass"><div class="mh"><span id="mt">Video</span><button id="mx">✕</button></div><div class="mv"><iframe id="mf" allow="autoplay; fullscreen" title="Video"></iframe></div></div></div>
 
 <script>
-const W=[["Podcast Reel Edit","1XfwntyIalFjDB-9f6VRitjPIn6zOPkfZ"],["Edit 01","1rG0MwZm6ZSvZgmFLF8KavUqFzL5N68R7"],["Edit 02","1ht9m2GOuS4zPuluuQQZ2fj7UfrQrtM0m"],["Edit 03","1NPCJ2ABPDlioOmtDX8a7Pj_wpp6v5sLr"]];
+const W=[["Sports Video 1","14bmDkgJkmxlB4taFzPa43oPSfZbDhVCn","playversesportacademy · Edited under Only Ace Media"],["Sports Video 2","1OeFjrAJdfvJ7VpFykaHkmuNg1aszi3o4","playversesportacademy · Edited under Only Ace Media"],["Real Estate 1","1bXjvJ9sAKk5Uecd52Fopp4bZ19J0bC3M","acresyards · Edited under Only Ace Media"],["Real Estate 2","19CVZZ6FBuQJmRdG4xLMGueyM0fkBIk2D","acresyards · Edited under Only Ace Media"],["Personal Branding 1","1Jik9bMQXJJxMl6dUCAFo_nXNS0i2SEoZ","Only Ace Media · Edited under Only Ace Media"],["Brand Product Review 1","1uEoeTqFy5pdl0u5epnPr-GPW8OT2rRP9","nourestofficial · Edited under Only Ace Media"],["Brand Product Review 2","1zVIHoOZpqHWt_m53gwpSBZH4me-WbJzE","nourestofficial · Edited under Only Ace Media"],["Podcast Reel Edit","1XfwntyIalFjDB-9f6VRitjPIn6zOPkfZ",""],["Edit 01","1rG0MwZm6ZSvZgmFLF8KavUqFzL5N68R7",""]];
 const $=s=>document.querySelector(s),cl=(v,a,b)=>Math.min(b,Math.max(a,v)),rad=d=>d*Math.PI/180;
 const stage=$('#stage'),wheel=$('#wheel'),lab=$('#wlabel'),ttl=$('#wtitle'),ix=$('#widx');
 const n=W.length,last=n-1,src=id=>`https://drive.google.com/file/d/${id}/preview`;
+const setT=i=>{ttl.innerHTML=W[i][0]+(W[i][2]?'<small>'+W[i][2]+'</small>':'')};
 wheel.innerHTML=W.map((w,i)=>`<div class="card" data-i="${i}"><span class="face"><img src="https://drive.google.com/thumbnail?id=${w[1]}&sz=w800" alt="${w[0]}" decoding="async" draggable="false"><span class="ov"></span><span class="go glass">▶ Play</span></span></div>`).join('');
 ix.innerHTML=W.map((w,i)=>`<li><button data-i="${i}">${w[0]}</button></li>`).join('');
 const cards=[...wheel.children],btns=[...ix.querySelectorAll('button')];
@@ -182,9 +187,9 @@ function draw(ts){raf=0;const dt=lt?Math.min((ts-lt)/16.667,3):1;lt=ts;
     c.firstElementChild.style.transform=`scale(${M.rs+(1-M.rs)*m})`;});
   lab.style.opacity=1-m;ttl.style.opacity=m;
   const near=cl(Math.round(pos),0,last);
-  if(near!==active){active=near;ttl.textContent=W[active][0];btns.forEach((b,i)=>b.classList.toggle('on',i===active));}
+  if(near!==active){active=near;setT(active);btns.forEach((b,i)=>b.classList.toggle('on',i===active));}
   if(turn!==target)kick();else lt=0;}
-ttl.textContent=W[0][0];btns[0].classList.add('on');kick();
+setT(0);btns[0].classList.add('on');kick();
 stage.addEventListener('wheel',e=>{const nx=target+e.deltaY/900;if(nx>0&&nx<last+1)e.preventDefault();to(nx);
   clearTimeout(settle);settle=setTimeout(()=>to(Math.round(target)),140);},{passive:false});
 stage.addEventListener('pointerdown',e=>{drag=e.clientY;moved=0});
@@ -202,9 +207,8 @@ $('#mx').onclick=closeM;$('#modal').onclick=e=>{if(e.target.id==='modal')closeM(
 const words="Great work isn’t made alone. Let’s build something people can’t stop watching.".split(' ');
 $('#rt').innerHTML=words.map(w=>`<span>${w}</span>`).join(' ');
 const ws=[...document.querySelectorAll('#rt span')],rv=$('#reveal');
-let lp=-1;function rev(){const r=rv.getBoundingClientRect(),p=cl(-r.top/(r.height-innerHeight),0,1);if(p===lp)return;lp=p;
-  ws.forEach((s,i)=>{const st=i/ws.length*.85;s.style.opacity=.12+.88*cl((p-st)/.12,0,1)});}
-let tk=0;addEventListener('scroll',()=>{if(!tk)tk=requestAnimationFrame(()=>{tk=0;nv();rev()})},{passive:true});rev();
+ws.forEach((s,i)=>s.style.setProperty('--i',i));new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){$('#rt').classList.add('seen');o.disconnect()}})},{threshold:.35}).observe($('#rt'));
+let tk=0;addEventListener('scroll',()=>{if(!tk)tk=requestAnimationFrame(()=>{tk=0;nv()})},{passive:true});
 /* nav */
 const secs=['home','about','work','end'].map(id=>document.getElementById(id)),links=[...document.querySelectorAll('nav a')];let cur='';
 function nv(){let c='home';secs.forEach(s=>{if(scrollY>=s.offsetTop-200)c=s.id});if(c===cur)return;cur=c;links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+c))}
